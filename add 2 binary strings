@@ -1,0 +1,33 @@
+def add_binary_strings(str1, str2):
+    result = ""
+    carry = 0
+    
+    # Make the lengths of str1 and str2 equal by padding with zeros
+    length = max(len(str1), len(str2))
+    str1 = str1.zfill(length)
+    str2 = str2.zfill(length)
+    
+    # Iterate through the strings in reverse order
+    for i in range(length - 1, -1, -1):
+        # Convert characters to integers
+        bit1 = int(str1[i])
+        bit2 = int(str2[i])
+        
+        # Perform binary addition
+        sum_bits = bit1 + bit2 + carry
+        
+        # Append the result to the beginning of the string
+        result = str(sum_bits % 2) + result
+        
+        # Update carry for the next iteration
+        carry = sum_bits // 2
+    
+    # Add the final carry if there is any
+    if carry:
+        result = "1" + result
+    
+    return result
+
+# Example usage:
+binary_sum = add_binary_strings("101", "011")
+print("Binary sum:", binary_sum)
